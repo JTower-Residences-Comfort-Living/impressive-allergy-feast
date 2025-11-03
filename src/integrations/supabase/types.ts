@@ -14,7 +14,285 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          booking_source: string | null
+          check_in: string
+          check_out: string
+          created_at: string | null
+          guest_email: string
+          guest_id: string | null
+          guest_name: string
+          guest_phone: string | null
+          id: string
+          notes: string | null
+          num_guests: number
+          payment_status: string | null
+          property_id: string | null
+          status: string | null
+          total_price: number
+          updated_at: string | null
+        }
+        Insert: {
+          booking_source?: string | null
+          check_in: string
+          check_out: string
+          created_at?: string | null
+          guest_email: string
+          guest_id?: string | null
+          guest_name: string
+          guest_phone?: string | null
+          id?: string
+          notes?: string | null
+          num_guests: number
+          payment_status?: string | null
+          property_id?: string | null
+          status?: string | null
+          total_price: number
+          updated_at?: string | null
+        }
+        Update: {
+          booking_source?: string | null
+          check_in?: string
+          check_out?: string
+          created_at?: string | null
+          guest_email?: string
+          guest_id?: string | null
+          guest_name?: string
+          guest_phone?: string | null
+          id?: string
+          notes?: string | null
+          num_guests?: number
+          payment_status?: string | null
+          property_id?: string | null
+          status?: string | null
+          total_price?: number
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          booking_id: string | null
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          message: string
+          sender_id: string | null
+        }
+        Insert: {
+          booking_id?: string | null
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          message: string
+          sender_id?: string | null
+        }
+        Update: {
+          booking_id?: string | null
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          message?: string
+          sender_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount: number
+          booking_id: string | null
+          created_at: string | null
+          id: string
+          payment_date: string | null
+          payment_method: string | null
+          payment_status: string | null
+          transaction_id: string | null
+        }
+        Insert: {
+          amount: number
+          booking_id?: string | null
+          created_at?: string | null
+          id?: string
+          payment_date?: string | null
+          payment_method?: string | null
+          payment_status?: string | null
+          transaction_id?: string | null
+        }
+        Update: {
+          amount?: number
+          booking_id?: string | null
+          created_at?: string | null
+          id?: string
+          payment_date?: string | null
+          payment_method?: string | null
+          payment_status?: string | null
+          transaction_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      properties: {
+        Row: {
+          address: string | null
+          amenities: Json | null
+          available_from: string | null
+          city: string | null
+          cleaning_fee: number | null
+          created_at: string | null
+          description: string | null
+          floor_number: number | null
+          id: string
+          images: Json | null
+          is_active: boolean | null
+          max_guests: number | null
+          owner_id: string | null
+          price_per_night: number | null
+          property_type: string | null
+          rules: string | null
+          title: string
+          updated_at: string | null
+          view_type: string | null
+        }
+        Insert: {
+          address?: string | null
+          amenities?: Json | null
+          available_from?: string | null
+          city?: string | null
+          cleaning_fee?: number | null
+          created_at?: string | null
+          description?: string | null
+          floor_number?: number | null
+          id?: string
+          images?: Json | null
+          is_active?: boolean | null
+          max_guests?: number | null
+          owner_id?: string | null
+          price_per_night?: number | null
+          property_type?: string | null
+          rules?: string | null
+          title: string
+          updated_at?: string | null
+          view_type?: string | null
+        }
+        Update: {
+          address?: string | null
+          amenities?: Json | null
+          available_from?: string | null
+          city?: string | null
+          cleaning_fee?: number | null
+          created_at?: string | null
+          description?: string | null
+          floor_number?: number | null
+          id?: string
+          images?: Json | null
+          is_active?: boolean | null
+          max_guests?: number | null
+          owner_id?: string | null
+          price_per_night?: number | null
+          property_type?: string | null
+          rules?: string | null
+          title?: string
+          updated_at?: string | null
+          view_type?: string | null
+        }
+        Relationships: []
+      }
+      reviews: {
+        Row: {
+          booking_id: string | null
+          comment: string | null
+          created_at: string | null
+          guest_id: string | null
+          id: string
+          property_id: string | null
+          rating: number | null
+        }
+        Insert: {
+          booking_id?: string | null
+          comment?: string | null
+          created_at?: string | null
+          guest_id?: string | null
+          id?: string
+          property_id?: string | null
+          rating?: number | null
+        }
+        Update: {
+          booking_id?: string | null
+          comment?: string | null
+          created_at?: string | null
+          guest_id?: string | null
+          id?: string
+          property_id?: string | null
+          rating?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: true
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
