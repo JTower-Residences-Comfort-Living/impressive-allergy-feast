@@ -2,6 +2,7 @@ import { PropertyHero } from "@/components/property/PropertyHero";
 import { PropertyDetails } from "@/components/property/PropertyDetails";
 import { AmenitiesSection } from "@/components/property/AmenitiesSection";
 import { BookingForm } from "@/components/property/BookingForm";
+import { PhotoGallery } from "@/components/property/PhotoGallery";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, User } from "lucide-react";
 
@@ -54,6 +55,9 @@ const Index = () => {
             </div>
           </div>
         </div>
+
+        {/* Photo Gallery */}
+        <PhotoGallery />
 
         {/* Amenities Section */}
         <AmenitiesSection />
