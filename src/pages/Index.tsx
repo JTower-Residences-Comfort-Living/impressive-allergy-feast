@@ -51,7 +51,7 @@ const Index = () => {
 
             {/* Right Column - Booking Form */}
             <div className="lg:col-span-1">
-              <BookingForm pricePerNight={85} cleaningFee={25} />
+              <BookingForm pricePerNight={45} cleaningFee={25} />
             </div>
           </div>
         </div>
