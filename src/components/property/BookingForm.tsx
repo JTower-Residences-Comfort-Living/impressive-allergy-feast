@@ -3,26 +3,59 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calendar, Users, DollarSign } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Calendar, Users, DollarSign, Percent, Tag } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface BookingFormProps {
   pricePerNight: number;
   cleaningFee?: number;
+  weeklyDiscount?: number;
+  monthlyDiscount?: number;
 }
 
-export const BookingForm = ({ pricePerNight, cleaningFee = 0 }: BookingFormProps) => {
+export const BookingForm = ({ 
+  pricePerNight, 
+  cleaningFee = 0,
+  weeklyDiscount = 10,
+  monthlyDiscount = 25
+}: BookingFormProps) => {
   const { toast } = useToast();
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(1);
   
-  const calculateTotal = () => {
+  const getNights = () => {
     if (!checkIn || !checkOut) return 0;
     const start = new Date(checkIn);
     const end = new Date(checkOut);
-    const nights = Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
-    return nights * pricePerNight + cleaningFee;
+    return Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  };
+
+  const getDiscount = (nights: number) => {
+    if (nights >= 30) return { rate: monthlyDiscount, label: "Monthly stay" };
+    if (nights >= 7) return { rate: weeklyDiscount, label: "Weekly stay" };
+    return { rate: 0, label: "" };
+  };
+  
+  const calculatePricing = () => {
+    const nights = getNights();
+    if (nights === 0) return null;
+    
+    const subtotal = nights * pricePerNight;
+    const discount = getDiscount(nights);
+    const discountAmount = Math.round(subtotal * (discount.rate / 100));
+    const total = subtotal - discountAmount + cleaningFee;
+    
+    return {
+      nights,
+      subtotal,
+      discountRate: discount.rate,
+      discountLabel: discount.label,
+      discountAmount,
+      cleaningFee,
+      total
+    };
   };
 
   const handleBooking = () => {
@@ -41,9 +74,7 @@ export const BookingForm = ({ pricePerNight, cleaningFee = 0 }: BookingFormProps
     });
   };
 
-  const total = calculateTotal();
-  const nights = checkIn && checkOut ? 
-    Math.ceil((new Date(checkOut).getTime() - new Date(checkIn).getTime()) / (1000 * 60 * 60 * 24)) : 0;
+  const pricing = calculatePricing();
 
   return (
     <Card className="sticky top-24 shadow-xl">
@@ -54,6 +85,18 @@ export const BookingForm = ({ pricePerNight, cleaningFee = 0 }: BookingFormProps
           <span className="text-base font-normal text-muted-foreground">/ night</span>
         </CardTitle>
         <CardDescription>Book your stay at JTower Residences</CardDescription>
+        
+        {/* Discount badges */}
+        <div className="flex flex-wrap gap-2 pt-2">
+          <Badge variant="secondary" className="text-xs">
+            <Tag className="w-3 h-3 mr-1" />
+            {weeklyDiscount}% off weekly
+          </Badge>
+          <Badge variant="secondary" className="text-xs">
+            <Percent className="w-3 h-3 mr-1" />
+            {monthlyDiscount}% off monthly
+          </Badge>
+        </div>
       </CardHeader>
       
       <CardContent className="space-y-4">
@@ -100,22 +143,40 @@ export const BookingForm = ({ pricePerNight, cleaningFee = 0 }: BookingFormProps
           />
         </div>
         
-        {total > 0 && (
+        {pricing && (
           <div className="pt-4 border-t space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">${pricePerNight} × {nights} nights</span>
-              <span className="font-semibold">${pricePerNight * nights}</span>
+              <span className="text-muted-foreground">${pricePerNight} × {pricing.nights} nights</span>
+              <span className="font-semibold">${pricing.subtotal}</span>
             </div>
+            
+            {pricing.discountAmount > 0 && (
+              <div className="flex justify-between text-sm text-green-600">
+                <span className="flex items-center gap-1">
+                  <Tag className="w-3 h-3" />
+                  {pricing.discountLabel} ({pricing.discountRate}% off)
+                </span>
+                <span className="font-semibold">-${pricing.discountAmount}</span>
+              </div>
+            )}
+            
             {cleaningFee > 0 && (
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Cleaning fee</span>
                 <span className="font-semibold">${cleaningFee}</span>
               </div>
             )}
+            
             <div className="flex justify-between text-lg font-bold pt-2 border-t">
               <span>Total</span>
-              <span className="text-primary">${total}</span>
+              <span className="text-primary">${pricing.total}</span>
             </div>
+            
+            {pricing.discountAmount > 0 && (
+              <p className="text-xs text-green-600 text-center font-medium">
+                You're saving ${pricing.discountAmount} with the {pricing.discountLabel.toLowerCase()} discount!
+              </p>
+            )}
           </div>
         )}
         
