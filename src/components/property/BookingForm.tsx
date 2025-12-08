@@ -245,6 +245,15 @@ export const BookingForm = ({
               Messenger: gene brigz
             </a>
             <a 
+              href="https://wa.me/34687196815" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:underline"
+            >
+              <Phone className="w-4 h-4" />
+              WhatsApp: +34687196815
+            </a>
+            <a 
               href="mailto:generomblon@gmail.com" 
               className="flex items-center gap-2 text-sm text-primary hover:underline"
             >
