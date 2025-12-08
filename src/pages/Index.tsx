@@ -45,7 +45,7 @@ const Index = () => {
                 propertyType="Studio Condo"
                 maxGuests={2}
                 floor={26}
-                availableFrom="Nov 18, 2025"
+                availableFrom="Dec 15, 2025"
               />
             </div>
 
@@ -101,7 +101,7 @@ const Index = () => {
         <footer className="bg-secondary py-8 mt-16">
           <div className="max-w-7xl mx-auto px-4 md:px-6 text-center text-muted-foreground">
             <p>© 2025 SkyView Studio at JTower Residences, Mandaue City</p>
-            <p className="text-sm mt-2">Available for booking starting November 18, 2025</p>
+            <p className="text-sm mt-2">Available for booking starting December 15, 2025</p>
           </div>
         </footer>
       </div>
