@@ -13,12 +13,24 @@ import hallway from "@/assets/hallway.jpg";
 import interiorView from "@/assets/interior-view.jpg";
 import livingArea2 from "@/assets/living-area-2.jpg";
 import bathroom from "@/assets/bathroom.jpg";
+import diningArea from "@/assets/dining-area.jpg";
+import bedroom from "@/assets/bedroom.jpg";
+import livingRoom from "@/assets/living-room.jpg";
+import bedroomWorkspace from "@/assets/bedroom-workspace.jpg";
+import livingRoom2 from "@/assets/living-room-2.jpg";
+import tvArea from "@/assets/tv-area.jpg";
 
 const galleryImages = [
   { src: heroProperty, alt: "Bedroom with Mountain View" },
-  { src: mountainView, alt: "Living Area" },
-  { src: livingArea2, alt: "Living Room" },
+  { src: bedroom, alt: "Bedroom" },
+  { src: bedroomWorkspace, alt: "Bedroom with Workspace" },
+  { src: livingRoom, alt: "Living Room" },
+  { src: livingRoom2, alt: "Living Area" },
+  { src: tvArea, alt: "TV & Entertainment Area" },
+  { src: diningArea, alt: "Dining Area" },
   { src: kitchenArea, alt: "Kitchen" },
+  { src: mountainView, alt: "Mountain View" },
+  { src: livingArea2, alt: "Living Space" },
   { src: interiorView, alt: "Interior Overview" },
   { src: bathroom, alt: "Bathroom" },
   { src: buildingExterior, alt: "Building Entrance" },
