@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Users, DollarSign, Percent, Tag } from "lucide-react";
+import { Calendar, Users, DollarSign, Percent, Tag, Phone, Mail, ShieldCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface BookingFormProps {
@@ -188,8 +188,39 @@ export const BookingForm = ({
           Request Booking
         </Button>
         
+        {/* ID Verification Notice */}
+        <div className="bg-secondary/50 rounded-lg p-4 space-y-3">
+          <div className="flex items-start gap-2">
+            <ShieldCheck className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+            <div>
+              <p className="text-sm font-medium text-foreground">ID Verification Required</p>
+              <p className="text-xs text-muted-foreground">
+                Please have a valid government-issued ID ready for identity verification upon booking.
+              </p>
+            </div>
+          </div>
+          
+          <div className="border-t pt-3 space-y-2">
+            <p className="text-xs font-medium text-foreground">Contact host for payment arrangements:</p>
+            <a 
+              href="tel:09177197258" 
+              className="flex items-center gap-2 text-sm text-primary hover:underline"
+            >
+              <Phone className="w-4 h-4" />
+              09177197258
+            </a>
+            <a 
+              href="mailto:generomblon@gmail.com" 
+              className="flex items-center gap-2 text-sm text-primary hover:underline"
+            >
+              <Mail className="w-4 h-4" />
+              generomblon@gmail.com
+            </a>
+          </div>
+        </div>
+        
         <p className="text-xs text-center text-muted-foreground">
-          You won't be charged yet. Create an account to complete your booking.
+          You won't be charged yet. Contact the host to finalize your booking.
         </p>
       </CardContent>
     </Card>
