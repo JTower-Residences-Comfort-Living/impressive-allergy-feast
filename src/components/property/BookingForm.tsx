@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Users, DollarSign, Percent, Tag, Phone, Mail, ShieldCheck } from "lucide-react";
+import { Calendar, Users, DollarSign, Percent, Tag, Phone, Mail, ShieldCheck, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface BookingFormProps {
@@ -58,6 +58,28 @@ export const BookingForm = ({
     };
   };
 
+  const generateBookingMessage = () => {
+    const nights = getNights();
+    const pricing = calculatePricing();
+    const checkInDate = checkIn ? new Date(checkIn).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '';
+    const checkOutDate = checkOut ? new Date(checkOut).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '';
+    
+    let message = `Hello! I would like to book JTower Residences.\n\n`;
+    message += `📅 Check-in: ${checkInDate}\n`;
+    message += `📅 Check-out: ${checkOutDate}\n`;
+    message += `🌙 Nights: ${nights}\n`;
+    message += `👥 Guests: ${guests}\n`;
+    if (pricing) {
+      message += `💰 Total: $${pricing.total}`;
+      if (pricing.discountAmount > 0) {
+        message += ` (${pricing.discountLabel} - ${pricing.discountRate}% off)`;
+      }
+    }
+    message += `\n\nPlease let me know how to proceed with the payment and ID verification. Thank you!`;
+    
+    return encodeURIComponent(message);
+  };
+
   const handleBooking = () => {
     if (!checkIn || !checkOut) {
       toast({
@@ -68,9 +90,13 @@ export const BookingForm = ({
       return;
     }
     
+    // Open Messenger with pre-filled booking details
+    const message = generateBookingMessage();
+    window.open(`https://m.me/gene.romblon?text=${message}`, '_blank');
+    
     toast({
-      title: "Booking Request Received!",
-      description: "We'll send you a confirmation email shortly. Please sign up or log in to complete your booking.",
+      title: "Redirecting to Messenger",
+      description: "Please send your booking details to the host and await confirmation.",
     });
   };
 
@@ -203,11 +229,20 @@ export const BookingForm = ({
           <div className="border-t pt-3 space-y-2">
             <p className="text-xs font-medium text-foreground">Contact host for payment arrangements:</p>
             <a 
-              href="tel:09177197258" 
+              href="tel:+639177197258" 
               className="flex items-center gap-2 text-sm text-primary hover:underline"
             >
               <Phone className="w-4 h-4" />
-              09177197258
+              +639177197258
+            </a>
+            <a 
+              href="https://m.me/gene.romblon" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:underline"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Messenger: gene brigz
             </a>
             <a 
               href="mailto:generomblon@gmail.com" 
