@@ -12,7 +12,7 @@ import frontDesk from "@/assets/front-desk.jpg";
 import hallway from "@/assets/hallway.jpg";
 import interiorView from "@/assets/interior-view.jpg";
 import livingArea2 from "@/assets/living-area-2.jpg";
-import bathroom from "@/assets/bathroom.jpg";
+import bathroom from "@/assets/bathroom-new.jpg";
 import diningArea from "@/assets/dining-area.jpg";
 import bedroom from "@/assets/bedroom.jpg";
 import livingRoom from "@/assets/living-room.jpg";
