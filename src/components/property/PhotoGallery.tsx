@@ -12,7 +12,8 @@ import frontDesk from "@/assets/front-desk.jpg";
 import hallway from "@/assets/hallway.jpg";
 import interiorView from "@/assets/interior-view.jpg";
 import livingArea2 from "@/assets/living-area-2.jpg";
-import bathroom from "@/assets/bathroom-new.jpg";
+import bathroom1 from "@/assets/bathroom-1.jpg";
+import bathroom2 from "@/assets/bathroom-2.jpg";
 import diningArea from "@/assets/dining-area.jpg";
 import bedroom from "@/assets/bedroom.jpg";
 import livingRoom from "@/assets/living-room.jpg";
@@ -31,8 +32,8 @@ const galleryImages = [
   { src: kitchenArea, alt: "Kitchen" },
   { src: mountainView, alt: "Mountain View" },
   { src: livingArea2, alt: "Living Space" },
-  { src: interiorView, alt: "Interior Overview" },
-  { src: bathroom, alt: "Bathroom" },
+  { src: bathroom1, alt: "Bathroom" },
+  { src: bathroom2, alt: "Bathroom Amenities" },
   { src: buildingExterior, alt: "Building Entrance" },
   { src: frontDesk, alt: "Front Desk" },
   { src: hallway, alt: "Elevator Hallway" },
